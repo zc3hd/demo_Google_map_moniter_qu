@@ -1,0 +1,405 @@
+<!doctype HTML>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>详情页</title>
+<style>
+
+body {
+font-family: Tahoma;
+font-size: 10pt;
+/*line-height: 170%;*/
+padding-top: 10px;
+margin:0px;
+}
+/*------------------------------------------------------------侧边导航*/
+nav {
+background: gray;
+color: white;
+text-decoration: none;
+overflow-x: hidden;
+overflow-y: auto;
+position: fixed;
+top: 0;
+left: 0;
+bottom: 0;
+width: 200px;
+}
+nav a {
+	text-decoration: none;
+	color: white;
+}
+/*-------------------------------------------------------------标头*/
+@keyframes move {
+	0% {
+		text-shadow: 5px 0px 3px rgba(0,0,0,0.5);
+		transform: perspective(2000px) rotateY(0deg);
+	}
+	25% {
+		text-shadow: 20px 0px 5px rgba(0,0,0,.3);
+		transform: perspective(2000px) rotateY(40deg);
+	}
+	50% {
+		text-shadow: 5px 0px 5px rgba(0,0,0,.5);
+		transform: perspective(2000px) rotateY(0deg);
+	}
+	75% {
+		text-shadow: -20px 0px 5px rgba(0,0,0,.3);
+		transform: perspective(2000px) rotateY(-40deg);
+	}
+	100% {
+		text-shadow: 5px 0px 3px rgba(0,0,0,0.5);
+		transform: perspective(2000px) rotateY(0deg);
+	}
+}
+
+@keyframes moveX {
+	0% {
+		text-shadow: 0px 0px 3px rgba(0,0,0,0.5);
+		transform: perspective(2000px) rotateX(0deg);
+	}
+	25% {
+		text-shadow: 0px 10px 5px rgba(0,0,0,.3);
+		transform: perspective(2000px) rotateX(30deg);
+	}
+	50% {
+		text-shadow: 0px 0px 5px rgba(0,0,0,.5);
+		transform: perspective(2000px) rotateX(0deg);
+	}
+	75% {
+		text-shadow: 0px 10px 5px rgba(0,0,0,.3);
+		transform: perspective(2000px) rotateX(-30deg);
+	}
+	100% {
+		text-shadow: 0px 0px 3px rgba(0,0,0,0.5);
+		transform: perspective(2000px) rotateX(0deg);
+	}
+}
+
+
+header {
+padding-top: 10px;
+padding-left: 220px;
+font-size: 18px;
+position: absolute;
+/*margin-bottom:30px;*/
+text-shadow: 5px 0px 3px rgba(0,0,0,.3);
+color: black;
+}
+
+header h1 {
+	
+	margin:0px;
+	padding: 0px;
+	animation: move 6s forwards infinite;
+}
+/*----------------------------------------------------------主题*/
+article {
+margin-top: 80px;
+padding-left: 220px;
+}
+
+@keyframes imgMoveOver {
+	0% {
+		/*text-shadow: 5px 5px 3px rgba(0,0,0,0.5);*/
+		transform: scale(1) ;
+	}
+	100% {
+		/*text-shadow: 5px 5px 3px rgba(0,0,0,0.5);*/
+		/*transform: perspective(2000px) rotateY(30deg);*/
+		transform: scale(1.01) translateY(-2%);
+	}
+}
+
+@keyframes imgMoveOut {
+	0% {
+		/*text-shadow: 5px 5px 3px rgba(0,0,0,0.5);*/
+		
+		transform: scale(1.1) translateY(-5%);
+	}
+	100% {
+		/*text-shadow: 5px 5px 3px rgba(0,0,0,0.5);*/
+		/*transform: perspective(2000px) rotateY(30deg);*/
+		transform: scale(1) ;
+	}
+}
+
+img {
+	/*position: relative;*/
+	width: 900px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: Orange;
+	transform-origin:left top;
+}
+img:hover {
+	animation: imgMoveOver 0.5s forwards;
+}
+/*段落*/
+h3,h4{
+	/*background-color: rgba(0,0,0,.3);*/
+	background-image: linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.3) 65%, rgba(0,0,0,0.2) 75%, white 100%);
+/*	width: 500px;*/
+	color: white;
+	font-size: 22px;
+	padding-left: 10px;
+}
+h4{
+	width: 50%;
+	font-size: 18px;
+	margin-left: 5px;
+}
+pre {
+	background-color: black;
+}
+pre code {
+	color: yellow;
+	font-size: 16px;
+	font-weight: 500;
+}
+/*---------------------------------------------------------底部*/
+footer {
+padding-top: 10px;
+padding-left: 220px;
+padding-bottom: 10px;
+background-color: black;
+color: white;
+}
+footer h3 {
+	color: white;
+	background-color:transparent;
+	background-image: linear-gradient(to right, black 0%,  black 100%);
+}
+</style>
+</head>
+<body>
+
+<nav>
+<ul>
+<li class="level3"><a href="#0.1">1.运行</a></li><li class="level3"><a href="#0.2">2.业务流程</a></li><li class="level4"><a href="#0.2.1">2.1 控件栏渲染</a></li><li class="level4"><a href="#0.2.2">2.2 区静态数据渲染</a></li><li class="level4"><a href="#0.2.3">2.3 marker设置label</a></li><li class="level4"><a href="#0.2.4">2.4 点击区，进入区下面数据的实时监控</a></li><li class="level4"><a href="#0.2.5">2.5 点击被监控的点，进入追踪模式</a></li><li class="level3"><a href="#0.3">3.思路及注意</a></li><li class="level3"><a href="#0.4">开源协议</a></li></ul>
+
+</nav>
+
+<header>
+<h1 id="-google_map_moniter-">【一】Google_Map_moniter 谷歌地图--后台聚合（区监控）</h1>
+
+</header>
+
+<article>
+<h3 id="0.1">1.运行</h3>
+<pre><code>* $ git pull
+* $ gulp;
+* 替换自己的key值。V3版本。
+</code></pre><h3 id="0.2">2.业务流程</h3>
+<ul>
+<li>进入页面是区的静态数据进行渲染。此项目是区（进行一层数据聚合），google控件加载；</li>
+<li>点击每个区下面进行区下面数据的实时监控。数据为实时刷新，第一次进行最优显示。</li>
+<li>点击被监控的点，进入追踪模式，被追踪的点上方有该点的信息板面，可以拓展更多信息。追踪时，地图最优显示，被追踪的点居于屏幕正中，移动过的地方有追踪的线。</li>
+<li>点击退出追踪，进入当前的监控的点的地图。数据为实时刷新，第一次进行最优显示。</li>
+<li>退出监控，退出到区的静态数据页面。（可进行区动态数据监控。但其实没有必要。）</li>
+</ul>
+<h4 id="0.2.1">2.1 控件栏渲染</h4>
+<ul>
+<li>首先进入页面是，Google原生控件栏渲染，个人感觉比百度的控件栏好多了。所以没有进行控件重新替换。</li>
+</ul>
+<p><img src="./webapp/readme_img/001.jpg" alt=""></p>
+<h4 id="0.2.2">2.2 区静态数据渲染</h4>
+<ul>
+<li>项目的选择和模式的选择都会走同一个函数，以得到不同的数据。</li>
+</ul>
+<p><img src="./webapp/readme_img/002.jpg" alt=""></p>
+<pre><code>  for (var i = 0; i &lt; data.all.length; i++) {
+    marker_obj = me.m_draw_p(data.all[i]);
+    me.p_arr.push(marker_obj);
+    marker_arr.push(marker_obj.marker);
+  }
+</code></pre><ul>
+<li><p>可以看到有两个地方在收集数据。me.p_arr用于清除数据，marker_arr用于展示数据最优显示。</p>
+</li>
+<li><p>打marker的方式和百度的不一样，给marker设置label也不一样。这里的不一样造成需要返回marker和infoWindow两个作为属性的对象。</p>
+</li>
+</ul>
+<p><img src="./webapp/readme_img/003.jpg" alt=""></p>
+<h4 id="0.2.3">2.3 marker设置label</h4>
+<ul>
+<li>google自带的label其实挺好用。但是信息显示框样式不好修改，而且右侧有关闭按钮。</li>
+</ul>
+<p><img src="./webapp/readme_img/004.jpg" alt=""></p>
+<ul>
+<li>这里采用了一个包，自定义的信息版。可以随意设置关闭按钮，透明图，相对marker位置。<a href="">源码和案例</a>;</li>
+</ul>
+<h4 id="0.2.4">2.4 点击区，进入区下面数据的实时监控</h4>
+<ul>
+<li>记录点击过的区数据，方便退出追踪时，进入该点击区的下面的监控页面。</li>
+</ul>
+<p><img src="./webapp/readme_img/005.jpg" alt=""></p>
+<ul>
+<li>google的自定义控件比百度简单很多。</li>
+</ul>
+<pre><code>  me.back_to_qu = document.createElement(&#39;div&#39;);
+  new NewControl({
+    p_dom: me.back_to_qu,
+    map: me.map,
+    offset: [&#39;10px&#39;, 0, 0, &#39;10px&#39;],
+    btns: [&#39;退出监控tuij&#39;]
+  }).init();
+</code></pre><ul>
+<li>打自定义marker也比较简单：</li>
+</ul>
+<pre><code>  var marker = new me.Gmap.Marker({
+    position: {
+      lat: data.position.lat,
+      lng: data.position.lng
+    },
+    map: me.map,
+    title: &#39;设备号：&#39; + data.name,
+    icon: &#39;../../../images/car_online.png&#39;
+  });
+</code></pre><ul>
+<li>实时渲染时的清除数据（相比百度比较笨重）（和点击区，进入区监控数据之前，对全部区数据进行清除一样）：</li>
+</ul>
+<pre><code>  // 清除数据
+  if (me.qu_xm_arr.length != 0) {
+    for (var i = 0; i &lt; me.qu_xm_arr.length; i++) {
+      me.qu_xm_arr[i].setMap(null);
+    };
+  }
+</code></pre><ul>
+<li>区数据的清除：marker要清除，label要关闭的。</li>
+</ul>
+<pre><code>  // 清除数据，容器重置
+  for (var i = 0; i &lt; arr.length; i++) {
+    // 清除点
+    arr[i].marker.setMap(null);
+    // 清除信息框
+    arr[i].infowindow.close();
+  };
+</code></pre><ul>
+<li>最优显示数据（相比百度挺笨重），官方API说明为：LatLngBounds 实例代表通过地理坐标表示的矩形，包含与 180度子午线相交的矩形。该类通过extend((point:LatLng)添加位置信息，最后通过map.fitBounds(bounds:LatLngBounds)来让地图适应该bounds下面的点集，从而达到展示标注在最佳视野的效果。</li>
+</ul>
+<pre><code>  // 设置最优视角
+  m_setVeiwPort: function(arr) {
+    /* body... */
+    var me = this;
+    var bounds = new me.Gmap.LatLngBounds();
+    //读取标注点的位置坐标，加入LatLngBounds  
+    for (var i = 0; i &lt; arr.length; i++) {
+      bounds.extend(arr[i].getPosition());
+    }
+    //调整map，使其适应LatLngBounds,实现展示最佳视野的功能
+    me.map.fitBounds(bounds);
+  },
+</code></pre><h4 id="0.2.5">2.5 点击被监控的点，进入追踪模式</h4>
+<ul>
+<li>追踪模式：</li>
+</ul>
+<p><img src="./webapp/readme_img/006.jpg" alt=""></p>
+<ul>
+<li>点击一个被监控的点，进入追踪，去除【退出监控】控件：</li>
+</ul>
+<pre><code>  &lt;!-- 创建 --&gt;
+  me.back_to_qu_xm = document.createElement(&#39;div&#39;);
+  &lt;!-- 删除 --&gt;
+  me.map.controls[google.maps.ControlPosition.LEFT_TOP].clear(me.back_to_qu_xm);
+</code></pre><ul>
+<li>先打点记录marker：</li>
+</ul>
+<pre><code>&lt;!-- 收集点me.zz_p，me.zz_p_label 为空时，进行收集和打点 --&gt;
+  if (me.zz_p == null) {
+    // 根据ID请求到数据
+    var marker = new me.Gmap.Marker({
+      position: {
+        lat: data[0].position.lat,
+        lng: data[0].position.lng
+      },
+      map: me.map,
+      icon: &#39;../../../images/car_online.png&#39;,
+      anchorPoint: new google.maps.Point({ x: 50, y: 50 })
+    });
+    var str = &#39;&lt;div class=&quot;markLabel&quot;&gt;&#39; +
+      &#39;&lt;span class=&quot;labelName&quot; id=&quot;devName&quot;&gt;设备名称：&#39; + data[0].name +
+      &#39;&lt;br /&gt;&#39; +
+      &#39;&lt;/span&gt;&#39; +
+      &#39;&lt;div class=&quot;labelArrow&quot;&gt;&lt;/div&gt;&#39; +
+      &#39;&lt;/div&gt;&#39;;
+    var infowindow = me.m_p_label(str);
+    infowindow.open(me.map, marker);
+    // 收集marker
+    me.zz_p = marker;
+    me.zz_p_label = infowindow;
+
+    view_arr.push(marker);
+  }
+</code></pre><ul>
+<li>移动marker，划线，收集所有的线（便于清除）：</li>
+</ul>
+<pre><code>  else {
+    var newPoint = new google.maps.LatLng(data[0].position.lat, data[0].position.lng);
+    var oldPoint = me.zz_p.getPosition();
+    // 收集所有的折线
+    me.zz_p_line.push(me.qu_xm_p_line([oldPoint, newPoint]));
+    // 移动到新的点上
+    me.zz_p.setPosition(newPoint);
+    view_arr.push(me.zz_p);
+  }
+  &lt;!-- 划线 --&gt;
+  qu_xm_p_line: function(arr) {
+    // body... 
+    var me = this;
+    var flightPlanCoordinates = arr;
+    var flightPath = new me.Gmap.Polyline({
+      path: flightPlanCoordinates,
+      geodesic: true,
+      strokeColor: &#39;#21536d&#39;,
+      strokeOpacity: 0.8,
+      strokeWeight: 4
+    });
+    flightPath.setMap(me.map);
+    return flightPath;
+  },
+</code></pre><h3 id="0.3">3.思路及注意</h3>
+<ul>
+<li>本人是先进行百度地图的各种，然后是由于业务要求进行google这个高大上的地图，感觉没有百度用的顺手</li>
+<li>以 HTML5 形式声明您的应用，注意请求的src.以通过请求 <a href="http://maps.googleapis.com/（对于中国用户，则是">http://maps.googleapis.com/（对于中国用户，则是</a> <a href="http://maps.google.cn）通过">http://maps.google.cn）通过</a> HTTP 加载 Google Maps JavaScript API。</li>
+<li>后期补充mongoDB数据库进行数据请求,作为框架修改可以直接拿来就用。</li>
+</ul>
+
+</article>
+<footer>
+<h3 id="0.4">开源协议</h3>
+<p>本程序基于MIT协议开源。</p>
+<pre><code>Copyright (c) cc.
+</code></pre>
+</footer>
+</body>
+
+<script>
+	var div = document.createElement("div"); 
+	var body = document.getElementsByTagName('body')[0];
+	console.log(body);
+div.id = 'back_index';	
+div.style.width = '200px';
+div.style.height = '200px';
+div.style.backgroundImage = "url(./back_index.png)";
+div.style.backgroundSize = 'cover';
+div.style.position = 'fixed';
+div.style.left = '0px';
+div.style.bottom = '20px';
+body.appendChild(div);
+document.write(div);
+div.onmouseover = function () {
+	/* body... */
+	div.style.animation = 'imgMoveOver 0.5s forwards';
+};
+div.onmouseout = function () {
+	/* body... */
+	div.style.animation = 'imgMoveOut 0.5s forwards';
+};
+div.onclick = function () {
+	/* body... */
+	window.location.href = "https://zc3hd.github.io/";
+};
+
+</script>
+
+</html>
